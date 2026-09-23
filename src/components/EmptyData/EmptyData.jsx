@@ -1,7 +1,10 @@
 import Icon from '../Icon/Icon.jsx'
 import './EmptyData.css'
 
-function EmptyData({ message = "You don't have any bookmarks yet." }) {
+function EmptyData({
+  message = "You don't have any bookmarks yet.",
+  description = 'Add your first bookmark to see it here.',
+}) {
   return (
     <section className="empty-data" aria-labelledby="empty-data-title">
       <span className="empty-data__icon" aria-hidden="true">
@@ -11,7 +14,7 @@ function EmptyData({ message = "You don't have any bookmarks yet." }) {
         {message}
       </h2>
       <p className="empty-data__description text-preset-4-medium">
-        Add your first bookmark to see it here.
+        {description}
       </p>
     </section>
   )

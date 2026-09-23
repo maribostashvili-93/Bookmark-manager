@@ -21,6 +21,8 @@ function AppLayout({
   highlight,
   bookmarks,
   emptyMessage,
+  error,
+  isLoading = false,
   active = 'home',
   selectedTags = [],
   selectedTag = '',
@@ -131,6 +133,8 @@ function AppLayout({
           <BookmarkList
             bookmarks={bookmarks}
             emptyMessage={emptyMessage}
+            error={error}
+            isLoading={isLoading}
             openMenuId={visibleMenuId}
             onDeleteBookmark={handleDeleteBookmark}
             onEditBookmark={handleOpenEditForm}

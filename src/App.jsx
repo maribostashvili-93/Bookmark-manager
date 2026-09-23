@@ -1,12 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Home from './pages/Home/Home.jsx'
 import Archived from './pages/Archived/Archived.jsx'
-import {
-  bookmarks as activeBookmarks,
-  archivedBookmarks,
-} from './data/bookmarks.js'
 
-const initialBookmarks = [...activeBookmarks, ...archivedBookmarks]
+let initialBookmarksRequest
+
+function fetchInitialBookmarks() {
+  if (!initialBookmarksRequest) {
+    initialBookmarksRequest = fetch('/data/bookmarks.json').then((response) => {
+      if (!response.ok) {
+        throw new Error(`Unable to load bookmarks (${response.status})`)
+      }
+
+      return response.json()
+    }).then((data) => {
+      if (!Array.isArray(data)) {
+        throw new Error('Bookmark data must be an array')
+      }
+
+      return data
+    })
+  }
+
+  return initialBookmarksRequest
+}
 
 function filterByView(bookmarks, currentView) {
   return bookmarks.filter((bookmark) =>
@@ -66,15 +82,40 @@ function movePinnedFirst(bookmarks) {
   )
 }
 
-// Pages: Home, Archived, Tagged, Search, SignIn, SignUp, ForgotPassword (see src/pages)
-// Prototype states (open menus, modals, drawer): see src/pages/Screens.jsx
-// Swap the component below to preview another page until routing is added.
+// App owns the bookmark collection and the derived view/filter/sort pipeline.
 function App() {
-  const [bookmarks, setBookmarks] = useState(initialBookmarks)
+  const [bookmarks, setBookmarks] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [currentView, setCurrentView] = useState('home')
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTag, setSelectedTag] = useState('')
   const [sortOption, setSortOption] = useState('Recently added')
+
+  useEffect(() => {
+    let isCurrent = true
+
+    fetchInitialBookmarks()
+      .then((data) => {
+        if (isCurrent) {
+          setBookmarks(data)
+        }
+      })
+      .catch((fetchError) => {
+        if (isCurrent) {
+          setError(fetchError.message)
+        }
+      })
+      .finally(() => {
+        if (isCurrent) {
+          setIsLoading(false)
+        }
+      })
+
+    return () => {
+      isCurrent = false
+    }
+  }, [])
 
   function handleTogglePin(bookmarkId) {
     setBookmarks((currentBookmarks) =>
@@ -137,6 +178,8 @@ function App() {
 
   const sharedPageProps = {
     bookmarks: visibleBookmarks,
+    error,
+    isLoading,
     onAddBookmark: handleAddBookmark,
     onDeleteBookmark: handleDeleteBookmark,
     onNavigate: setCurrentView,

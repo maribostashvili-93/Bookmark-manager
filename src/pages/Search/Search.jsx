@@ -1,14 +1,13 @@
 import AppLayout from '../../components/AppLayout/AppLayout.jsx'
-import { searchResults, searchQuery } from '../../data/bookmarks.js'
 
-function Search() {
+function Search({ bookmarks = [], searchTerm = '' }) {
   return (
     <AppLayout
       title="Results for:"
-      highlight={`“${searchQuery}”`}
-      bookmarks={searchResults}
+      highlight={`“${searchTerm}”`}
+      bookmarks={bookmarks}
       active="home"
-      searchValue={searchQuery}
+      searchValue={searchTerm}
     />
   )
 }

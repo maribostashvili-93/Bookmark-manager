@@ -1,12 +1,11 @@
 import AppLayout from '../../components/AppLayout/AppLayout.jsx'
-import { taggedBookmarks, selectedTags } from '../../data/bookmarks.js'
 
-function Tagged() {
+function Tagged({ bookmarks = [], selectedTags = [] }) {
   return (
     <AppLayout
       title="Bookmarks tagged:"
       highlight={selectedTags.join(', ')}
-      bookmarks={taggedBookmarks}
+      bookmarks={bookmarks}
       active={null}
       selectedTags={selectedTags}
     />

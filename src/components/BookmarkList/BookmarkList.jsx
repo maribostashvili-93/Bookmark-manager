@@ -1,7 +1,15 @@
 import BookmarkCard from '../BookmarkCard/BookmarkCard.jsx'
 import EmptyData from '../EmptyData/EmptyData.jsx'
 
-function BookmarkList({ bookmarks = [], emptyMessage, openMenuId, onDeleteBookmark, onEditBookmark, onToggleArchive, onToggleMenu, onTogglePin }) {
+function BookmarkList({ bookmarks = [], emptyMessage, error, isLoading = false, openMenuId, onDeleteBookmark, onEditBookmark, onToggleArchive, onToggleMenu, onTogglePin }) {
+  if (isLoading) {
+    return <EmptyData message="Loading bookmarks..." description="Please wait while your bookmarks are loaded." />
+  }
+
+  if (error) {
+    return <EmptyData message="Unable to load bookmarks." description={error} />
+  }
+
   if (bookmarks.length === 0) {
     return <EmptyData message={emptyMessage} />
   }

@@ -1,11 +1,13 @@
 import AppLayout from '../../components/AppLayout/AppLayout.jsx'
 
-function Home({ bookmarks, emptyMessage, onAddBookmark, onDeleteBookmark, onNavigate, onSearchChange, onSortChange, onTagChange, onToggleArchive, onTogglePin, onUpdateBookmark, searchTerm, selectedTag, sortOption }) {
+function Home({ bookmarks, emptyMessage, error, isLoading, onAddBookmark, onDeleteBookmark, onNavigate, onSearchChange, onSortChange, onTagChange, onToggleArchive, onTogglePin, onUpdateBookmark, searchTerm, selectedTag, sortOption }) {
   return (
     <AppLayout
       title="All bookmarks"
       bookmarks={bookmarks}
       emptyMessage={emptyMessage}
+      error={error}
+      isLoading={isLoading}
       active="home"
       onAddBookmark={onAddBookmark}
       onDeleteBookmark={onDeleteBookmark}

@@ -1,12 +1,14 @@
 import AppLayout from '../../components/AppLayout/AppLayout.jsx'
 
-function Archived({ bookmarks, emptyMessage, onAddBookmark, onDeleteBookmark, onNavigate, onSearchChange, onSortChange, onTagChange, onToggleArchive, onUpdateBookmark, searchTerm, selectedTag, sortOption }) {
+function Archived({ bookmarks, emptyMessage, error, isLoading, onAddBookmark, onDeleteBookmark, onNavigate, onSearchChange, onSortChange, onTagChange, onToggleArchive, onUpdateBookmark, searchTerm, selectedTag, sortOption }) {
   return (
     <AppLayout
       title="Archived bookmarks"
       bookmarks={bookmarks}
       active="archived"
       emptyMessage={emptyMessage ?? "You don't have any archived bookmarks."}
+      error={error}
+      isLoading={isLoading}
       onAddBookmark={onAddBookmark}
       onDeleteBookmark={onDeleteBookmark}
       onNavigate={onNavigate}
