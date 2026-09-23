@@ -1,7 +1,7 @@
 import Sidebar from '../Sidebar/Sidebar.jsx'
 import Header from '../Header/Header.jsx'
 import BookmarkHeader from '../BookmarkHeader/BookmarkHeader.jsx'
-import BookmarkCard from '../BookmarkCard/BookmarkCard.jsx'
+import BookmarkList from '../BookmarkList/BookmarkList.jsx'
 import { ModalOverlay } from '../Modal/Modal.jsx'
 import './AppLayout.css'
 
@@ -39,15 +39,7 @@ function AppLayout({
         <main className="main">
           <BookmarkHeader title={title} highlight={highlight} sortOpen={sortOpen} />
 
-          <section className="bookmark-grid">
-            {bookmarks.map((bookmark) => (
-              <BookmarkCard
-                key={bookmark.id}
-                bookmark={bookmark}
-                menuOpen={bookmark.id === openMenuId}
-              />
-            ))}
-          </section>
+          <BookmarkList bookmarks={bookmarks} openMenuId={openMenuId} />
         </main>
       </div>
 
