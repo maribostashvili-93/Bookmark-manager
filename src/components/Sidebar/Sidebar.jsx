@@ -27,7 +27,7 @@ const tags = [
 // Tablet / mobile (< 1024px): off-canvas drawer, shown when open=true.
 // active: "home" | "archived" | null — highlighted nav item
 // selectedTags: tag names shown as checked; shows "Reset" when not empty
-function Sidebar({ open = false, active = 'home', selectedTags = [] }) {
+function Sidebar({ open = false, active = 'home', selectedTags = [], onNavigate }) {
   return (
     <aside className={`sidebar ${open ? 'sidebar--open' : ''}`}>
       <div className="sidebar__header">
@@ -40,16 +40,26 @@ function Sidebar({ open = false, active = 'home', selectedTags = [] }) {
       <nav className="sidebar__section">
         <ul className="nav-list">
           <li>
-            <a href="#" className={`nav-item ${active === 'home' ? 'nav-item--active' : ''}`}>
+            <button
+              type="button"
+              className={`nav-item ${active === 'home' ? 'nav-item--active' : ''}`}
+              aria-current={active === 'home' ? 'page' : undefined}
+              onClick={() => onNavigate?.('home')}
+            >
               <Icon name="home" />
-              <span className="nav-item__label text-preset-3">Home</span>
-            </a>
+              <span className="nav-item__label text-preset-3">All Bookmarks</span>
+            </button>
           </li>
           <li>
-            <a href="#" className={`nav-item ${active === 'archived' ? 'nav-item--active' : ''}`}>
+            <button
+              type="button"
+              className={`nav-item ${active === 'archived' ? 'nav-item--active' : ''}`}
+              aria-current={active === 'archived' ? 'page' : undefined}
+              onClick={() => onNavigate?.('archived')}
+            >
               <Icon name="archive" />
               <span className="nav-item__label text-preset-3">Archived</span>
-            </a>
+            </button>
           </li>
         </ul>
 

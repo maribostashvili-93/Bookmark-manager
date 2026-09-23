@@ -19,6 +19,7 @@ function AppLayout({
   title,
   highlight,
   bookmarks,
+  emptyMessage,
   active = 'home',
   selectedTags = [],
   sidebarOpen = false,
@@ -28,6 +29,8 @@ function AppLayout({
   sortOpen = false,
   profileOpen = false,
   searchValue,
+  onNavigate,
+  onToggleArchive,
   onTogglePin,
 }) {
   const [activeMenuId, setActiveMenuId] = useState(null)
@@ -42,9 +45,19 @@ function AppLayout({
     setActiveMenuId(null)
   }
 
+  function handleToggleArchive(bookmarkId) {
+    onToggleArchive?.(bookmarkId)
+    setActiveMenuId(null)
+  }
+
   return (
     <div className="app">
-      <Sidebar open={sidebarOpen} active={active} selectedTags={selectedTags} />
+      <Sidebar
+        open={sidebarOpen}
+        active={active}
+        selectedTags={selectedTags}
+        onNavigate={onNavigate}
+      />
       {sidebarOpen && <div className="sidebar-overlay" />}
 
       <div className="app__content">
@@ -55,7 +68,9 @@ function AppLayout({
 
           <BookmarkList
             bookmarks={bookmarks}
+            emptyMessage={emptyMessage}
             openMenuId={visibleMenuId}
+            onToggleArchive={handleToggleArchive}
             onToggleMenu={handleMenuToggle}
             onTogglePin={handleTogglePin}
           />

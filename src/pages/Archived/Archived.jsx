@@ -1,8 +1,16 @@
 import AppLayout from '../../components/AppLayout/AppLayout.jsx'
-import { archivedBookmarks } from '../../data/bookmarks.js'
 
-function Archived() {
-  return <AppLayout title="Archived bookmarks" bookmarks={archivedBookmarks} active="archived" />
+function Archived({ bookmarks, onNavigate, onToggleArchive }) {
+  return (
+    <AppLayout
+      title="Archived bookmarks"
+      bookmarks={bookmarks}
+      active="archived"
+      emptyMessage="You don't have any archived bookmarks."
+      onNavigate={onNavigate}
+      onToggleArchive={onToggleArchive}
+    />
+  )
 }
 
 export default Archived

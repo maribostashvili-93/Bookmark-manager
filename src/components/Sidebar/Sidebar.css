@@ -83,6 +83,7 @@
 
 /* Nav item — Default / Hover / Active */
 .nav-item {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: var(--spacing-100);
@@ -92,6 +93,8 @@
   background: var(--color-surface);
   color: var(--color-text-muted);
   text-decoration: none;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
   outline: none;
 }
