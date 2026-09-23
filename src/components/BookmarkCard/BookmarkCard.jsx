@@ -5,7 +5,7 @@ import '../DropdownMenu/DropdownMenu.css'
 import './BookmarkCard.css'
 
 // menuOpen=true shows the "⋮" actions menu under the button
-function BookmarkCard({ bookmark, menuOpen = false, onDeleteBookmark, onToggleArchive, onToggleMenu, onTogglePin }) {
+function BookmarkCard({ bookmark, menuOpen = false, onDeleteBookmark, onEditBookmark, onToggleArchive, onToggleMenu, onTogglePin }) {
   const {
     logo,
     title,
@@ -49,6 +49,7 @@ function BookmarkCard({ bookmark, menuOpen = false, onDeleteBookmark, onToggleAr
                   archived={isArchived}
                   pinned={isPinned}
                   onDelete={() => onDeleteBookmark?.(bookmark.id)}
+                  onEdit={() => onEditBookmark?.(bookmark)}
                   onToggleArchive={() => onToggleArchive?.(bookmark.id)}
                   onTogglePin={() => onTogglePin?.(bookmark.id)}
                 />

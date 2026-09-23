@@ -6,7 +6,7 @@ import '../Button/Button.css'
 import './Header.css'
 
 // searchValue: pre-filled search text · profileOpen: shows the profile menu
-function Header({ searchValue, profileOpen = false, onAddBookmark }) {
+function Header({ searchValue = '', profileOpen = false, onAddBookmark, onSearchChange }) {
   return (
     <header className="header">
       <div className="header__start">
@@ -21,7 +21,8 @@ function Header({ searchValue, profileOpen = false, onAddBookmark }) {
             type="search"
             className="search__input text-preset-4-medium"
             placeholder="Search by title..."
-            defaultValue={searchValue}
+            value={searchValue}
+            onChange={(event) => onSearchChange?.(event.target.value)}
           />
         </label>
       </div>

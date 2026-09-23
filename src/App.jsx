@@ -14,6 +14,7 @@ const initialBookmarks = [...activeBookmarks, ...archivedBookmarks]
 function App() {
   const [bookmarks, setBookmarks] = useState(initialBookmarks)
   const [currentView, setCurrentView] = useState('home')
+  const [searchTerm, setSearchTerm] = useState('')
 
   function handleTogglePin(bookmarkId) {
     setBookmarks((currentBookmarks) =>
@@ -57,17 +58,39 @@ function App() {
     )
   }
 
-  const visibleBookmarks = bookmarks.filter((bookmark) =>
-    currentView === 'archived' ? bookmark.isArchived : !bookmark.isArchived,
-  )
+  function handleUpdateBookmark(bookmarkId, bookmarkData) {
+    setBookmarks((currentBookmarks) =>
+      currentBookmarks.map((bookmark) =>
+        bookmark.id === bookmarkId
+          ? { ...bookmark, ...bookmarkData, id: bookmark.id }
+          : bookmark,
+      ),
+    )
+  }
+
+  const normalizedSearchTerm = searchTerm.trim().toLowerCase()
+  const visibleBookmarks = bookmarks.filter((bookmark) => {
+    const belongsToCurrentView = currentView === 'archived'
+      ? bookmark.isArchived
+      : !bookmark.isArchived
+    const matchesSearch = !normalizedSearchTerm
+      || bookmark.title.toLowerCase().includes(normalizedSearchTerm)
+      || bookmark.description.toLowerCase().includes(normalizedSearchTerm)
+
+    return belongsToCurrentView && matchesSearch
+  })
 
   const sharedPageProps = {
     bookmarks: visibleBookmarks,
     onAddBookmark: handleAddBookmark,
     onDeleteBookmark: handleDeleteBookmark,
     onNavigate: setCurrentView,
+    onSearchChange: setSearchTerm,
     onToggleArchive: handleToggleArchive,
     onTogglePin: handleTogglePin,
+    onUpdateBookmark: handleUpdateBookmark,
+    searchTerm,
+    emptyMessage: normalizedSearchTerm ? 'No bookmarks match your search.' : undefined,
   }
 
   return currentView === 'archived'

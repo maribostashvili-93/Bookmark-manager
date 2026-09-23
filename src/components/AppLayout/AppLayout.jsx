@@ -33,11 +33,14 @@ function AppLayout({
   onAddBookmark,
   onDeleteBookmark,
   onNavigate,
+  onSearchChange,
   onToggleArchive,
   onTogglePin,
+  onUpdateBookmark,
 }) {
   const [activeMenuId, setActiveMenuId] = useState(null)
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false)
+  const [editingBookmark, setEditingBookmark] = useState(null)
   const visibleMenuId = openMenuId ?? activeMenuId
 
   function handleMenuToggle(bookmarkId) {
@@ -54,9 +57,30 @@ function AppLayout({
     setActiveMenuId(null)
   }
 
-  function handleAddBookmark(bookmarkData) {
-    onAddBookmark?.(bookmarkData)
-    setIsAddModalOpen(false)
+  function handleOpenAddForm() {
+    setEditingBookmark(null)
+    setIsFormModalOpen(true)
+  }
+
+  function handleOpenEditForm(bookmark) {
+    setEditingBookmark(bookmark)
+    setActiveMenuId(null)
+    setIsFormModalOpen(true)
+  }
+
+  function handleCloseForm() {
+    setIsFormModalOpen(false)
+    setEditingBookmark(null)
+  }
+
+  function handleSubmitBookmark(bookmarkData) {
+    if (editingBookmark) {
+      onUpdateBookmark?.(editingBookmark.id, bookmarkData)
+    } else {
+      onAddBookmark?.(bookmarkData)
+    }
+
+    handleCloseForm()
   }
 
   function handleDeleteBookmark(bookmarkId) {
@@ -78,7 +102,8 @@ function AppLayout({
         <Header
           searchValue={searchValue}
           profileOpen={profileOpen}
-          onAddBookmark={() => setIsAddModalOpen(true)}
+          onAddBookmark={handleOpenAddForm}
+          onSearchChange={onSearchChange}
         />
 
         <main className="main">
@@ -89,6 +114,7 @@ function AppLayout({
             emptyMessage={emptyMessage}
             openMenuId={visibleMenuId}
             onDeleteBookmark={handleDeleteBookmark}
+            onEditBookmark={handleOpenEditForm}
             onToggleArchive={handleToggleArchive}
             onToggleMenu={handleMenuToggle}
             onTogglePin={handleTogglePin}
@@ -97,11 +123,14 @@ function AppLayout({
       </div>
 
       {modal && <ModalOverlay>{modal}</ModalOverlay>}
-      {isAddModalOpen && (
+      {isFormModalOpen && (
         <ModalOverlay>
           <BookmarkFormModal
-            onSubmit={handleAddBookmark}
-            onCancel={() => setIsAddModalOpen(false)}
+            key={editingBookmark?.id ?? 'add-bookmark'}
+            mode={editingBookmark ? 'edit' : 'add'}
+            bookmark={editingBookmark ?? {}}
+            onSubmit={handleSubmitBookmark}
+            onCancel={handleCloseForm}
           />
         </ModalOverlay>
       )}
