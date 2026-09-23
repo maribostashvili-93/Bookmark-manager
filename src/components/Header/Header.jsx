@@ -6,7 +6,7 @@ import '../Button/Button.css'
 import './Header.css'
 
 // searchValue: pre-filled search text · profileOpen: shows the profile menu
-function Header({ searchValue, profileOpen = false }) {
+function Header({ searchValue, profileOpen = false, onAddBookmark }) {
   return (
     <header className="header">
       <div className="header__start">
@@ -28,7 +28,7 @@ function Header({ searchValue, profileOpen = false }) {
 
       <div className="header__actions">
         {/* Text is hidden on mobile, only the + icon stays */}
-        <button type="button" className="btn btn--primary btn--md header__add">
+        <button type="button" className="btn btn--primary btn--md header__add" onClick={onAddBookmark}>
           <Icon name="plus" />
           <span className="btn__text text-preset-3">Add Bookmark</span>
         </button>

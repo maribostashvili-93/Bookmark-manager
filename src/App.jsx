@@ -35,12 +35,32 @@ function App() {
     )
   }
 
+  function handleAddBookmark(bookmarkData) {
+    const newBookmark = {
+      id: crypto.randomUUID(),
+      ...bookmarkData,
+      logo: '/favicon.svg',
+      views: 0,
+      lastVisited: 'Never',
+      createdAt: new Date().toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+      }),
+      isPinned: false,
+      isArchived: false,
+    }
+
+    setBookmarks((currentBookmarks) => [...currentBookmarks, newBookmark])
+    setCurrentView('home')
+  }
+
   const visibleBookmarks = bookmarks.filter((bookmark) =>
     currentView === 'archived' ? bookmark.isArchived : !bookmark.isArchived,
   )
 
   const sharedPageProps = {
     bookmarks: visibleBookmarks,
+    onAddBookmark: handleAddBookmark,
     onNavigate: setCurrentView,
     onToggleArchive: handleToggleArchive,
     onTogglePin: handleTogglePin,

@@ -3,6 +3,7 @@ import Sidebar from '../Sidebar/Sidebar.jsx'
 import Header from '../Header/Header.jsx'
 import BookmarkHeader from '../BookmarkHeader/BookmarkHeader.jsx'
 import BookmarkList from '../BookmarkList/BookmarkList.jsx'
+import BookmarkFormModal from '../Modal/BookmarkFormModal.jsx'
 import { ModalOverlay } from '../Modal/Modal.jsx'
 import './AppLayout.css'
 
@@ -29,11 +30,13 @@ function AppLayout({
   sortOpen = false,
   profileOpen = false,
   searchValue,
+  onAddBookmark,
   onNavigate,
   onToggleArchive,
   onTogglePin,
 }) {
   const [activeMenuId, setActiveMenuId] = useState(null)
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const visibleMenuId = openMenuId ?? activeMenuId
 
   function handleMenuToggle(bookmarkId) {
@@ -50,6 +53,11 @@ function AppLayout({
     setActiveMenuId(null)
   }
 
+  function handleAddBookmark(bookmarkData) {
+    onAddBookmark?.(bookmarkData)
+    setIsAddModalOpen(false)
+  }
+
   return (
     <div className="app">
       <Sidebar
@@ -61,7 +69,11 @@ function AppLayout({
       {sidebarOpen && <div className="sidebar-overlay" />}
 
       <div className="app__content">
-        <Header searchValue={searchValue} profileOpen={profileOpen} />
+        <Header
+          searchValue={searchValue}
+          profileOpen={profileOpen}
+          onAddBookmark={() => setIsAddModalOpen(true)}
+        />
 
         <main className="main">
           <BookmarkHeader title={title} highlight={highlight} sortOpen={sortOpen} />
@@ -78,6 +90,14 @@ function AppLayout({
       </div>
 
       {modal && <ModalOverlay>{modal}</ModalOverlay>}
+      {isAddModalOpen && (
+        <ModalOverlay>
+          <BookmarkFormModal
+            onSubmit={handleAddBookmark}
+            onCancel={() => setIsAddModalOpen(false)}
+          />
+        </ModalOverlay>
+      )}
       {toast}
     </div>
   )

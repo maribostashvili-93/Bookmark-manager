@@ -4,7 +4,7 @@ import './Modal.css'
 
 // size: lg (570px form modals) | sm (450px confirm modals)
 // Wrap in <ModalOverlay> to show it over the page.
-export function Modal({ title, description, size = 'lg', children, actions }) {
+export function Modal({ title, description, size = 'lg', children, actions, onClose }) {
   return (
     <div className={`modal modal--${size}`} role="dialog" aria-modal="true" aria-label={title}>
       <div className="modal__header">
@@ -17,9 +17,9 @@ export function Modal({ title, description, size = 'lg', children, actions }) {
       {actions && <div className="modal__actions">{actions}</div>}
 
       {size === 'lg' ? (
-        <Button hierarchy="secondary" iconOnly leftIcon="x-close" className="modal__close" aria-label="Close" />
+        <Button hierarchy="secondary" iconOnly leftIcon="x-close" className="modal__close" aria-label="Close" onClick={onClose} />
       ) : (
-        <button type="button" className="modal__close modal__close--plain" aria-label="Close">
+        <button type="button" className="modal__close modal__close--plain" aria-label="Close" onClick={onClose}>
           <Icon name="close-small" />
         </button>
       )}
