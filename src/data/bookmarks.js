@@ -30,7 +30,7 @@ const frontendMentorBookmark = {
   views: 47,
   lastVisited: '23 Sep',
   createdAt: '15 Jan',
-  pinned: true,
+  isPinned: true,
 }
 
 const cssGridGardenBookmark = {
@@ -61,7 +61,7 @@ export const bookmarks = [
     views: 152,
     lastVisited: '24 Sep',
     createdAt: '10 Jan',
-    pinned: true,
+    isPinned: true,
   },
   {
     id: 3,
@@ -245,7 +245,7 @@ export const archivedBookmarks = [
     views: 6,
     lastVisited: '18 Apr',
     createdAt: '22 Feb',
-    archived: true,
+    isArchived: true,
   },
   {
     id: 18,
@@ -258,7 +258,7 @@ export const archivedBookmarks = [
     views: 12,
     lastVisited: '12 Jun',
     createdAt: '01 Feb',
-    archived: true,
+    isArchived: true,
   },
 ]
 

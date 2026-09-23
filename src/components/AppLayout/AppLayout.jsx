@@ -40,8 +40,12 @@ function AppLayout({
           <BookmarkHeader title={title} highlight={highlight} sortOpen={sortOpen} />
 
           <section className="bookmark-grid">
-            {bookmarks.map(({ id, ...bookmark }) => (
-              <BookmarkCard key={id} {...bookmark} menuOpen={id === openMenuId} />
+            {bookmarks.map((bookmark) => (
+              <BookmarkCard
+                key={bookmark.id}
+                bookmark={bookmark}
+                menuOpen={bookmark.id === openMenuId}
+              />
             ))}
           </section>
         </main>

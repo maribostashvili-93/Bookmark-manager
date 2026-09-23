@@ -5,7 +5,20 @@ import '../DropdownMenu/DropdownMenu.css'
 import './BookmarkCard.css'
 
 // menuOpen=true shows the "⋮" actions menu under the button
-function BookmarkCard({ logo, title, url, description, tags, views, lastVisited, createdAt, pinned = false, archived = false, menuOpen = false }) {
+function BookmarkCard({ bookmark, menuOpen = false }) {
+  const {
+    logo,
+    title,
+    url,
+    description,
+    tags,
+    views,
+    lastVisited,
+    createdAt,
+    isPinned = false,
+    isArchived = false,
+  } = bookmark
+
   return (
     <article className={`card ${menuOpen ? 'card--menu-open' : ''}`}>
       <div className="card__body">
@@ -25,7 +38,7 @@ function BookmarkCard({ logo, title, url, description, tags, views, lastVisited,
             />
             {menuOpen && (
               <div className="popover">
-                <BookmarkActionsMenu archived={archived} pinned={pinned} />
+                <BookmarkActionsMenu archived={isArchived} pinned={isPinned} />
               </div>
             )}
           </div>
@@ -57,8 +70,8 @@ function BookmarkCard({ logo, title, url, description, tags, views, lastVisited,
             {createdAt}
           </span>
         </div>
-        {pinned && <Icon name="pin" size="md" className="card__pin" />}
-        {archived && <span className="card__badge text-preset-5">Archived</span>}
+        {isPinned && <Icon name="pin" size="md" className="card__pin" />}
+        {isArchived && <span className="card__badge text-preset-5">Archived</span>}
       </footer>
     </article>
   )
