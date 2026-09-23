@@ -13,14 +13,56 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
     description: bookmark.description ?? '',
     tags: bookmark.tags?.join(', ') ?? '',
   })
+  const [errors, setErrors] = useState({})
 
   function handleChange(event) {
     const { name, value } = event.target
     setForm((currentForm) => ({ ...currentForm, [name]: value }))
+    setErrors((currentErrors) => ({ ...currentErrors, [name]: '' }))
+  }
+
+  function isValidUrl(value) {
+    try {
+      const parsedUrl = new URL(value)
+      return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:'
+    } catch {
+      return false
+    }
+  }
+
+  function validateForm() {
+    const nextErrors = {}
+    const tags = form.tags
+      .split(',')
+      .map((tag) => tag.trim())
+      .filter(Boolean)
+
+    if (!form.title.trim()) {
+      nextErrors.title = 'Title is required'
+    }
+
+    if (!isValidUrl(form.url.trim())) {
+      nextErrors.url = 'Please enter a valid URL'
+    }
+
+    if (!form.description.trim()) {
+      nextErrors.description = 'Description is required'
+    }
+
+    if (tags.length === 0) {
+      nextErrors.tags = 'Please enter at least one tag'
+    }
+
+    setErrors(nextErrors)
+    return Object.keys(nextErrors).length === 0
   }
 
   function handleSubmit(event) {
     event.preventDefault()
+
+    if (!validateForm()) {
+      return
+    }
 
     const fullUrl = form.url.trim()
     onSubmit?.({
@@ -53,7 +95,7 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
       }
       onClose={onCancel}
     >
-      <form id="bookmark-form" className="modal__form" onSubmit={handleSubmit}>
+      <form id="bookmark-form" className="modal__form" onSubmit={handleSubmit} noValidate>
         <InputField
           id="bookmark-title"
           name="title"
@@ -61,6 +103,8 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
           required
           value={form.title}
           onChange={handleChange}
+          error={Boolean(errors.title)}
+          hint={errors.title}
         />
         <TextareaField
           id="bookmark-description"
@@ -71,6 +115,8 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
           value={form.description}
           onChange={handleChange}
           counter={`${form.description.length}/280`}
+          error={Boolean(errors.description)}
+          hint={errors.description}
         />
         <InputField
           id="bookmark-url"
@@ -80,6 +126,8 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
           type="url"
           value={form.url}
           onChange={handleChange}
+          error={Boolean(errors.url)}
+          hint={errors.url}
         />
         <InputField
           id="bookmark-tags"
@@ -89,6 +137,8 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
           placeholder="e.g. design, learning, tools"
           value={form.tags}
           onChange={handleChange}
+          error={Boolean(errors.tags)}
+          hint={errors.tags}
         />
       </form>
     </Modal>
