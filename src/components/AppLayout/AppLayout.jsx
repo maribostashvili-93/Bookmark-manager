@@ -29,12 +29,14 @@ function AppLayout({
   toast,
   openMenuId,
   sortOpen = false,
+  sortOption = 'Recently added',
   profileOpen = false,
   searchValue,
   onAddBookmark,
   onDeleteBookmark,
   onNavigate,
   onSearchChange,
+  onSortChange,
   onTagChange,
   onToggleArchive,
   onTogglePin,
@@ -43,7 +45,9 @@ function AppLayout({
   const [activeMenuId, setActiveMenuId] = useState(null)
   const [isFormModalOpen, setIsFormModalOpen] = useState(false)
   const [editingBookmark, setEditingBookmark] = useState(null)
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false)
   const visibleMenuId = openMenuId ?? activeMenuId
+  const isSortOpen = sortOpen || isSortMenuOpen
 
   function handleMenuToggle(bookmarkId) {
     setActiveMenuId((currentId) => (currentId === bookmarkId ? null : bookmarkId))
@@ -85,6 +89,11 @@ function AppLayout({
     handleCloseForm()
   }
 
+  function handleSortChange(nextSortOption) {
+    onSortChange?.(nextSortOption)
+    setIsSortMenuOpen(false)
+  }
+
   function handleDeleteBookmark(bookmarkId) {
     onDeleteBookmark?.(bookmarkId)
     setActiveMenuId(null)
@@ -110,7 +119,14 @@ function AppLayout({
         />
 
         <main className="main">
-          <BookmarkHeader title={title} highlight={highlight} sortOpen={sortOpen} />
+          <BookmarkHeader
+            title={title}
+            highlight={highlight}
+            sortOpen={isSortOpen}
+            sortOption={sortOption}
+            onSortChange={handleSortChange}
+            onToggleSort={() => setIsSortMenuOpen((isOpen) => !isOpen)}
+          />
 
           <BookmarkList
             bookmarks={bookmarks}

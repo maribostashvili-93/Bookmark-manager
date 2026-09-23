@@ -1,6 +1,6 @@
 import AppLayout from '../../components/AppLayout/AppLayout.jsx'
 
-function Archived({ bookmarks, emptyMessage, onAddBookmark, onDeleteBookmark, onNavigate, onSearchChange, onTagChange, onToggleArchive, onUpdateBookmark, searchTerm, selectedTag }) {
+function Archived({ bookmarks, emptyMessage, onAddBookmark, onDeleteBookmark, onNavigate, onSearchChange, onSortChange, onTagChange, onToggleArchive, onUpdateBookmark, searchTerm, selectedTag, sortOption }) {
   return (
     <AppLayout
       title="Archived bookmarks"
@@ -11,11 +11,13 @@ function Archived({ bookmarks, emptyMessage, onAddBookmark, onDeleteBookmark, on
       onDeleteBookmark={onDeleteBookmark}
       onNavigate={onNavigate}
       onSearchChange={onSearchChange}
+      onSortChange={onSortChange}
       onTagChange={onTagChange}
       onToggleArchive={onToggleArchive}
       onUpdateBookmark={onUpdateBookmark}
       searchValue={searchTerm}
       selectedTag={selectedTag}
+      sortOption={sortOption}
     />
   )
 }
