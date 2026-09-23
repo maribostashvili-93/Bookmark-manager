@@ -15,6 +15,7 @@ function App() {
   const [bookmarks, setBookmarks] = useState(initialBookmarks)
   const [currentView, setCurrentView] = useState('home')
   const [searchTerm, setSearchTerm] = useState('')
+  const [selectedTag, setSelectedTag] = useState('')
 
   function handleTogglePin(bookmarkId) {
     setBookmarks((currentBookmarks) =>
@@ -76,8 +77,10 @@ function App() {
     const matchesSearch = !normalizedSearchTerm
       || bookmark.title.toLowerCase().includes(normalizedSearchTerm)
       || bookmark.description.toLowerCase().includes(normalizedSearchTerm)
+    const matchesTag = !selectedTag
+      || bookmark.tags.some((tag) => tag.toLowerCase() === selectedTag.toLowerCase())
 
-    return belongsToCurrentView && matchesSearch
+    return belongsToCurrentView && matchesSearch && matchesTag
   })
 
   const sharedPageProps = {
@@ -86,11 +89,17 @@ function App() {
     onDeleteBookmark: handleDeleteBookmark,
     onNavigate: setCurrentView,
     onSearchChange: setSearchTerm,
+    onTagChange: setSelectedTag,
     onToggleArchive: handleToggleArchive,
     onTogglePin: handleTogglePin,
     onUpdateBookmark: handleUpdateBookmark,
     searchTerm,
-    emptyMessage: normalizedSearchTerm ? 'No bookmarks match your search.' : undefined,
+    selectedTag,
+    emptyMessage: normalizedSearchTerm
+      ? 'No bookmarks match your search.'
+      : selectedTag
+        ? `No bookmarks found with the "${selectedTag}" tag.`
+        : undefined,
   }
 
   return currentView === 'archived'

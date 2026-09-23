@@ -3,31 +3,13 @@ import Logo from '../Logo/Logo.jsx'
 import Checkbox from '../Checkbox/Checkbox.jsx'
 import './Sidebar.css'
 
-const tags = [
-  { name: 'AI', count: 1 },
-  { name: 'Community', count: 5 },
-  { name: 'Compatibility', count: 1 },
-  { name: 'CSS', count: 6 },
-  { name: 'Design', count: 1 },
-  { name: 'Framework', count: 2 },
-  { name: 'Git', count: 1 },
-  { name: 'HTML', count: 2 },
-  { name: 'JavaScript', count: 3 },
-  { name: 'Layout', count: 3 },
-  { name: 'Learning', count: 6 },
-  { name: 'Performance', count: 2 },
-  { name: 'Practice', count: 5 },
-  { name: 'Reference', count: 4 },
-  { name: 'Tips', count: 4 },
-  { name: 'Tools', count: 4 },
-  { name: 'Tutorial', count: 3 },
-]
+const tags = ['React', 'JavaScript', 'CSS', 'Tools']
 
 // Desktop: always visible column.
 // Tablet / mobile (< 1024px): off-canvas drawer, shown when open=true.
 // active: "home" | "archived" | null — highlighted nav item
-// selectedTags: tag names shown as checked; shows "Reset" when not empty
-function Sidebar({ open = false, active = 'home', selectedTags = [], onNavigate }) {
+// selectedTag: one active tag; an empty value represents the All option.
+function Sidebar({ open = false, active = 'home', selectedTag = '', onNavigate, onTagChange }) {
   return (
     <aside className={`sidebar ${open ? 'sidebar--open' : ''}`}>
       <div className="sidebar__header">
@@ -66,17 +48,28 @@ function Sidebar({ open = false, active = 'home', selectedTags = [], onNavigate 
         <div className="tags">
           <div className="tags__heading">
             <p className="tags__title">TAGS</p>
-            {selectedTags.length > 0 && (
-              <button type="button" className="tags__reset text-preset-5">Reset</button>
+            {selectedTag && (
+              <button type="button" className="tags__reset text-preset-5" onClick={() => onTagChange?.('')}>Reset</button>
             )}
           </div>
           <ul className="nav-list">
+            <li>
+              <label className="nav-item">
+                <Checkbox
+                  checked={!selectedTag}
+                  onChange={() => onTagChange?.('')}
+                />
+                <span className="nav-item__label text-preset-3">All</span>
+              </label>
+            </li>
             {tags.map((tag) => (
-              <li key={tag.name}>
+              <li key={tag}>
                 <label className="nav-item">
-                  <Checkbox defaultChecked={selectedTags.includes(tag.name)} />
-                  <span className="nav-item__label text-preset-3">{tag.name}</span>
-                  <span className="badge text-preset-5">{tag.count}</span>
+                  <Checkbox
+                    checked={selectedTag === tag}
+                    onChange={() => onTagChange?.(tag)}
+                  />
+                  <span className="nav-item__label text-preset-3">{tag}</span>
                 </label>
               </li>
             ))}

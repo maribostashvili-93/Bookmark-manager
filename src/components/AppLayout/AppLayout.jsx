@@ -23,6 +23,7 @@ function AppLayout({
   emptyMessage,
   active = 'home',
   selectedTags = [],
+  selectedTag = '',
   sidebarOpen = false,
   modal,
   toast,
@@ -34,6 +35,7 @@ function AppLayout({
   onDeleteBookmark,
   onNavigate,
   onSearchChange,
+  onTagChange,
   onToggleArchive,
   onTogglePin,
   onUpdateBookmark,
@@ -93,8 +95,9 @@ function AppLayout({
       <Sidebar
         open={sidebarOpen}
         active={active}
-        selectedTags={selectedTags}
+        selectedTag={selectedTag || selectedTags[0] || ''}
         onNavigate={onNavigate}
+        onTagChange={onTagChange}
       />
       {sidebarOpen && <div className="sidebar-overlay" />}
 

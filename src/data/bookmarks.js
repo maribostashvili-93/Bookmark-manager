@@ -71,7 +71,7 @@ export const bookmarks = [
     fullUrl: 'https://react.dev',
     description:
       'The library for web and native user interfaces. Build user interfaces out of individual pieces called components.',
-    tags: ['JavaScript', 'Framework', 'Reference'],
+    tags: ['React', 'JavaScript', 'Framework', 'Reference'],
     views: 0,
     lastVisited: 'Never',
     createdAt: '20 Feb',
