@@ -37,17 +37,14 @@ function App() {
 
   function handleAddBookmark(bookmarkData) {
     const newBookmark = {
-      id: crypto.randomUUID(),
+      id: Date.now(),
       ...bookmarkData,
       logo: '/favicon.svg',
       views: 0,
       lastVisited: 'Never',
-      createdAt: new Date().toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-      }),
       isPinned: false,
       isArchived: false,
+      createdAt: new Date().toISOString(),
     }
 
     setBookmarks((currentBookmarks) => [...currentBookmarks, newBookmark])

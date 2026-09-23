@@ -18,6 +18,12 @@ function BookmarkCard({ bookmark, menuOpen = false, onToggleArchive, onToggleMen
     isPinned = false,
     isArchived = false,
   } = bookmark
+  const displayedCreatedAt = createdAt?.includes('T')
+    ? new Date(createdAt).toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+      })
+    : createdAt
 
   return (
     <article className={`card ${menuOpen ? 'card--menu-open' : ''}`}>
@@ -73,7 +79,7 @@ function BookmarkCard({ bookmark, menuOpen = false, onToggleArchive, onToggleMen
           </span>
           <span className="card__meta text-preset-5">
             <Icon name="calendar" size="sm" />
-            {createdAt}
+            {displayedCreatedAt}
           </span>
         </div>
         {isPinned && <Icon name="pin" size="md" className="card__pin" />}
