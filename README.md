@@ -37,7 +37,7 @@ Install [Node.js](https://nodejs.org/) and npm before running the project.
 
 ```bash
 git clone https://github.com/maribostashvili-93/Bookmark-manager.git
-cd Bookmark-manager/vite-project
+cd Bookmark-manager
 npm install
 ```
 
@@ -61,7 +61,7 @@ npm run preview  # Preview the production build
 ## Project Structure
 
 ```text
-vite-project/
+Bookmark-manager/
 |-- public/              # Static files and bookmark seed data
 |-- src/
 |   |-- assets/          # Icons, favicons, and images
