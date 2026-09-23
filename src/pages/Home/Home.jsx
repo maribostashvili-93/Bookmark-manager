@@ -1,7 +1,6 @@
 import AppLayout from '../../components/AppLayout/AppLayout.jsx'
-import { bookmarks } from '../../data/bookmarks.js'
 
-function Home() {
+function Home({ bookmarks }) {
   return <AppLayout title="All bookmarks" bookmarks={bookmarks} active="home" />
 }
 
