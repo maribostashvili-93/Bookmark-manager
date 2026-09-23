@@ -5,7 +5,7 @@ import '../DropdownMenu/DropdownMenu.css'
 import './BookmarkCard.css'
 
 // menuOpen=true shows the "⋮" actions menu under the button
-function BookmarkCard({ bookmark, menuOpen = false }) {
+function BookmarkCard({ bookmark, menuOpen = false, onToggleMenu, onTogglePin }) {
   const {
     logo,
     title,
@@ -35,10 +35,15 @@ function BookmarkCard({ bookmark, menuOpen = false }) {
               leftIcon="dots-vertical"
               aria-label="More options"
               aria-expanded={menuOpen}
+              onClick={() => onToggleMenu?.(bookmark.id)}
             />
             {menuOpen && (
               <div className="popover">
-                <BookmarkActionsMenu archived={isArchived} pinned={isPinned} />
+                <BookmarkActionsMenu
+                  archived={isArchived}
+                  pinned={isPinned}
+                  onTogglePin={() => onTogglePin?.(bookmark.id)}
+                />
               </div>
             )}
           </div>

@@ -8,10 +8,20 @@ import { bookmarks as initialBookmarks } from './data/bookmarks.js'
 function App() {
   const [bookmarks, setBookmarks] = useState(initialBookmarks)
 
+  function handleTogglePin(bookmarkId) {
+    setBookmarks((currentBookmarks) =>
+      currentBookmarks.map((bookmark) =>
+        bookmark.id === bookmarkId
+          ? { ...bookmark, isPinned: !bookmark.isPinned }
+          : bookmark,
+      ),
+    )
+  }
+
   return (
     <Home
       bookmarks={bookmarks}
-      setBookmarks={setBookmarks}
+      onTogglePin={handleTogglePin}
     />
   )
 }

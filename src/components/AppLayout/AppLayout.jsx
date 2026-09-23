@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Sidebar from '../Sidebar/Sidebar.jsx'
 import Header from '../Header/Header.jsx'
 import BookmarkHeader from '../BookmarkHeader/BookmarkHeader.jsx'
@@ -27,7 +28,20 @@ function AppLayout({
   sortOpen = false,
   profileOpen = false,
   searchValue,
+  onTogglePin,
 }) {
+  const [activeMenuId, setActiveMenuId] = useState(null)
+  const visibleMenuId = openMenuId ?? activeMenuId
+
+  function handleMenuToggle(bookmarkId) {
+    setActiveMenuId((currentId) => (currentId === bookmarkId ? null : bookmarkId))
+  }
+
+  function handleTogglePin(bookmarkId) {
+    onTogglePin?.(bookmarkId)
+    setActiveMenuId(null)
+  }
+
   return (
     <div className="app">
       <Sidebar open={sidebarOpen} active={active} selectedTags={selectedTags} />
@@ -39,7 +53,12 @@ function AppLayout({
         <main className="main">
           <BookmarkHeader title={title} highlight={highlight} sortOpen={sortOpen} />
 
-          <BookmarkList bookmarks={bookmarks} openMenuId={openMenuId} />
+          <BookmarkList
+            bookmarks={bookmarks}
+            openMenuId={visibleMenuId}
+            onToggleMenu={handleMenuToggle}
+            onTogglePin={handleTogglePin}
+          />
         </main>
       </div>
 

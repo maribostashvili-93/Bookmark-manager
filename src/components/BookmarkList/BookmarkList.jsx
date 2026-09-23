@@ -1,7 +1,7 @@
 import BookmarkCard from '../BookmarkCard/BookmarkCard.jsx'
 import EmptyData from '../EmptyData/EmptyData.jsx'
 
-function BookmarkList({ bookmarks = [], openMenuId }) {
+function BookmarkList({ bookmarks = [], openMenuId, onToggleMenu, onTogglePin }) {
   if (bookmarks.length === 0) {
     return <EmptyData />
   }
@@ -13,6 +13,8 @@ function BookmarkList({ bookmarks = [], openMenuId }) {
           key={bookmark.id}
           bookmark={bookmark}
           menuOpen={bookmark.id === openMenuId}
+          onToggleMenu={onToggleMenu}
+          onTogglePin={onTogglePin}
         />
       ))}
     </section>
