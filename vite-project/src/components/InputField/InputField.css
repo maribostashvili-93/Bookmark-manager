@@ -1,0 +1,66 @@
+/* Shared by InputField and TextareaField */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-075);
+  width: 100%;
+}
+
+.field__label {
+  display: flex;
+  gap: var(--spacing-025);
+  color: var(--color-text);
+}
+
+.field__required {
+  color: var(--color-required);
+  font-weight: 500;
+}
+
+.field__control {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  padding: calc(var(--spacing-150) - 1px);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-8);
+  background: var(--color-input-bg);
+  box-shadow: var(--shadow-xs);
+  color: var(--color-text-muted);
+}
+
+.field__control:hover {
+  background: var(--color-input-bg-hover);
+  border-color: var(--color-border-input-hover);
+}
+
+.field__control:focus-within {
+  background: var(--color-input-bg);
+  box-shadow: var(--focus-ring);
+}
+
+.field--error .field__control {
+  border-color: var(--color-error);
+}
+
+.field__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.field__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.field__hint {
+  color: var(--color-text-muted);
+}
+
+.field--error .field__hint {
+  color: var(--color-error);
+}

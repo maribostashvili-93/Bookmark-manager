@@ -1,0 +1,47 @@
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg-app);
+}
+
+.app__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-250);
+  padding: var(--spacing-400);
+}
+
+/* Desktop: 3 columns · Tablet: 2 columns · Mobile: 1 column */
+.bookmark-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--spacing-400);
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: var(--spacing-300) var(--spacing-200);
+  }
+}
+
+/* Dark backdrop behind the open sidebar drawer (tablet / mobile only) */
+.sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: block;
+    background: var(--color-overlay);
+  }
+}

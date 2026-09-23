@@ -1,0 +1,26 @@
+.bookmark-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+}
+
+/* text-preset-1 on desktop/tablet, text-preset-2 on mobile */
+.bookmark-header__title {
+  flex: 1;
+  min-width: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.bookmark-header__highlight {
+  color: var(--color-highlight);
+}
+
+@media (max-width: 767px) {
+  .bookmark-header__title {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}

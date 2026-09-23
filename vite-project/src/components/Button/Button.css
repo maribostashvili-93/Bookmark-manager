@@ -1,0 +1,92 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-050);
+  border-radius: var(--radius-8);
+  white-space: nowrap;
+  outline: none;
+}
+
+.btn__text {
+  padding: 0 var(--spacing-025);
+}
+
+/* Sizes — padding minus border width, since Figma draws strokes inside */
+.btn--primary.btn--sm {
+  padding: calc(var(--spacing-125) - 2px) calc(var(--spacing-150) - 2px);
+}
+
+.btn--primary.btn--md {
+  padding: calc(var(--spacing-150) - 2px) calc(var(--spacing-200) - 2px);
+}
+
+.btn--secondary.btn--sm {
+  padding: calc(var(--spacing-125) - 1px) calc(var(--spacing-150) - 1px);
+}
+
+.btn--secondary.btn--md {
+  padding: calc(var(--spacing-150) - 1px) calc(var(--spacing-200) - 1px);
+}
+
+/* Primary */
+.btn--primary {
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: var(--teal-700);
+  color: var(--neutral-light-0);
+  box-shadow: var(--shadow-button-inset);
+}
+
+.btn--primary:hover {
+  background: var(--teal-800);
+}
+
+.btn--primary:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.btn--primary.btn--error {
+  background: var(--red-800);
+}
+
+.btn--primary.btn--error:focus-visible {
+  box-shadow: var(--focus-ring-error);
+}
+
+/* Secondary */
+.btn--secondary {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover {
+  background: var(--color-surface-hover);
+}
+
+.btn--secondary:focus-visible {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  box-shadow: var(--focus-ring);
+}
+
+.btn--secondary.btn--active {
+  border-color: var(--color-secondary-active-border);
+  color: var(--color-secondary-active-text);
+}
+
+/* Icon only */
+.btn--icon-only {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.btn--secondary.btn--icon-only {
+  border-color: var(--color-border-icon-btn);
+}
+
+/* Full width */
+.btn--block {
+  width: 100%;
+}

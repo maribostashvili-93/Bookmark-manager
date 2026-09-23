@@ -1,0 +1,36 @@
+.checkbox {
+  appearance: none;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid var(--color-checkbox-border);
+  border-radius: var(--radius-4);
+  background: transparent center / 12px no-repeat;
+  cursor: pointer;
+  outline: none;
+}
+
+.checkbox:hover {
+  background-color: var(--color-checkbox-bg-hover);
+}
+
+.checkbox:focus-visible {
+  background-color: var(--color-surface);
+  box-shadow: var(--focus-ring);
+}
+
+.checkbox:checked {
+  border-color: var(--teal-700);
+  background-color: var(--teal-700);
+  background-image: url('../../assets/icons/checkmark.svg');
+}
+
+.checkbox:checked:hover {
+  border-color: var(--teal-800);
+  background-color: var(--teal-800);
+}
+
+.checkbox:checked:focus-visible {
+  background-color: var(--teal-700);
+}

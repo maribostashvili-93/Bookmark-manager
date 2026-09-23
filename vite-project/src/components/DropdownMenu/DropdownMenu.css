@@ -1,0 +1,55 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-050);
+  width: 200px;
+  margin: 0;
+  padding: var(--spacing-100);
+  list-style: none;
+  border: 1px solid var(--color-menu-border);
+  border-radius: var(--radius-8);
+  background: var(--color-menu-bg);
+  box-shadow: var(--shadow-menu);
+}
+
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-125);
+  width: 100%;
+  padding: var(--spacing-100);
+  border: none;
+  border-radius: var(--radius-6);
+  background: transparent;
+  color: var(--color-text-muted);
+  text-align: left;
+  outline: none;
+}
+
+.dropdown__item:hover {
+  background: var(--color-dropdown-hover);
+  color: var(--color-dropdown-text-hover);
+}
+
+.dropdown__item:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.dropdown__label {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Wrap a trigger button + its menu; the menu opens 10px below, right-aligned */
+.popover-anchor {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + var(--spacing-125));
+  right: 0;
+  z-index: 20;
+}

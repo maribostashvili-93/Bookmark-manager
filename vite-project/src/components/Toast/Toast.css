@@ -1,0 +1,63 @@
+/* Top-right notification, e.g. "Bookmark added successfully." */
+.toast {
+  position: fixed;
+  top: 100px;
+  right: var(--spacing-500);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  width: min(340px, calc(100% - 2 * var(--spacing-200)));
+  padding: calc(var(--spacing-125) - 1px) calc(var(--spacing-150) - 1px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-8);
+  background: var(--color-surface);
+  box-shadow: 0 6px 9px rgba(21, 21, 21, 0.08);
+  color: var(--color-text);
+}
+
+.toast__icon {
+  color: var(--color-accent);
+}
+
+.toast__message {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast__close {
+  display: flex;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-4);
+  background: none;
+  color: var(--color-text-muted);
+  outline: none;
+}
+
+.toast__close:hover {
+  color: var(--color-text);
+}
+
+.toast__close:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+/* Previews: normal flow */
+.toast--inline {
+  position: static;
+}
+
+@media (max-width: 767px) {
+  .toast {
+    top: auto;
+    right: var(--spacing-200);
+    bottom: var(--spacing-200);
+  }
+}
+
+@media (max-width: 767px) {
+  .toast--inline {
+    position: static;
+  }
+}

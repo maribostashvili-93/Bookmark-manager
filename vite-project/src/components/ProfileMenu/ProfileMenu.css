@@ -1,0 +1,42 @@
+.profile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-050);
+  width: 248px;
+  overflow: hidden;
+  border: 1px solid var(--color-menu-border);
+  border-radius: var(--radius-8);
+  background: var(--color-menu-bg);
+  box-shadow: var(--shadow-profile-menu);
+}
+
+.profile-menu__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-150);
+  padding: var(--spacing-150) var(--spacing-200);
+  border-bottom: 1px solid var(--color-menu-divider);
+}
+
+.profile-menu__user {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-menu__name {
+  color: var(--color-text);
+}
+
+.profile-menu__email {
+  color: var(--color-text-muted);
+}
+
+.profile-menu__section {
+  margin: 0;
+  padding: var(--spacing-050) var(--spacing-100);
+  list-style: none;
+}
+
+.profile-menu__footer {
+  border-top: 1px solid var(--color-menu-divider);
+}

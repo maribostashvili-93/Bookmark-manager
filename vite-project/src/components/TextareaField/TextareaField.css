@@ -1,0 +1,24 @@
+.field__control--textarea {
+  align-items: flex-start;
+}
+
+.field__textarea {
+  min-height: 94px;
+  resize: vertical;
+}
+
+.field__bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--spacing-125);
+}
+
+.field__bottom .field__hint {
+  flex: 1;
+}
+
+.field__counter {
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

@@ -1,0 +1,129 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-200);
+  padding: var(--spacing-200) var(--spacing-400);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header__start {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+  min-width: 0;
+}
+
+/* Hamburger — hidden on desktop */
+.header__menu {
+  display: none;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--spacing-150) - 1px);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-8);
+  background: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+}
+
+.header__menu:hover {
+  background: var(--color-surface-hover);
+}
+
+.header__menu:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  width: 320px;
+  padding: calc(var(--spacing-150) - 1px);
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-xs);
+  color: var(--color-text-muted);
+}
+
+.search:hover {
+  background: var(--color-input-bg-hover);
+}
+
+.search:focus-within {
+  background: var(--color-input-bg);
+  box-shadow: var(--focus-ring);
+}
+
+.search__input {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.search__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.header__actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--spacing-200);
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+  .header__menu {
+    display: flex;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .header {
+    gap: var(--spacing-125);
+    padding: var(--spacing-150) var(--spacing-200);
+  }
+
+  .header__start {
+    flex: 1;
+    gap: var(--spacing-125);
+  }
+
+  .header__menu {
+    padding: calc(var(--spacing-125) - 1px);
+  }
+
+  .search {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    padding: calc(var(--spacing-125) - 1px) calc(var(--spacing-150) - 1px);
+  }
+
+  .header__actions {
+    gap: var(--spacing-125);
+  }
+
+  .header__add.btn--md {
+    padding: calc(var(--spacing-125) - 2px);
+  }
+
+  .header__add .btn__text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
