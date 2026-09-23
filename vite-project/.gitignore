@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local project brief
+PROJECT_INSTRUCTIONS.md
