@@ -79,6 +79,43 @@ Bookmark-manager/
 
 The application checks `localStorage` first. If no saved bookmarks are available, it loads the initial data from `public/data/bookmarks.json`. Later changes are saved back to `localStorage`.
 
+## Application Architecture
+
+```text
+Bookmark Manager
+|
+|-- Layout
+|   |-- Header
+|   |-- Sidebar / Navigation
+|   `-- Main Content
+|
+|-- Bookmark Management
+|   |-- Bookmark List
+|   |-- Bookmark Card
+|   |-- Add Bookmark
+|   |-- Edit Bookmark
+|   |-- Delete Bookmark
+|   |-- Pin / Unpin
+|   `-- Archive / Restore
+|
+|-- Search & Organization
+|   |-- Search
+|   |-- Tag Filter
+|   `-- Sorting
+|
+|-- UI States
+|   |-- Loading
+|   |-- Error
+|   |-- Empty State
+|   `-- Modal
+|
+`-- Data Persistence
+    |-- bookmarks.json
+    |-- fetch()
+    |-- localStorage
+    `-- Theme
+```
+
 ## Design
 
 The UI includes bookmark cards, navigation, forms, dropdown menus, modals, toast messages, authentication screens, and light/dark appearance controls.
