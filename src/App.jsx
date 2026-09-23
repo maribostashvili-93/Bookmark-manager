@@ -51,6 +51,12 @@ function App() {
     setCurrentView('home')
   }
 
+  function handleDeleteBookmark(bookmarkId) {
+    setBookmarks((currentBookmarks) =>
+      currentBookmarks.filter((bookmark) => bookmark.id !== bookmarkId),
+    )
+  }
+
   const visibleBookmarks = bookmarks.filter((bookmark) =>
     currentView === 'archived' ? bookmark.isArchived : !bookmark.isArchived,
   )
@@ -58,6 +64,7 @@ function App() {
   const sharedPageProps = {
     bookmarks: visibleBookmarks,
     onAddBookmark: handleAddBookmark,
+    onDeleteBookmark: handleDeleteBookmark,
     onNavigate: setCurrentView,
     onToggleArchive: handleToggleArchive,
     onTogglePin: handleTogglePin,

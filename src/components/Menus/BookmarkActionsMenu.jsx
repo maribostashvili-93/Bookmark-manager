@@ -2,7 +2,7 @@ import { DropdownMenu, DropdownItem } from '../DropdownMenu/DropdownMenu.jsx'
 
 // Card "⋮" menu. archived=true shows the Archived-page actions,
 // pinned=true swaps "Pin" for "Unpin".
-function BookmarkActionsMenu({ archived = false, pinned = false, onToggleArchive, onTogglePin }) {
+function BookmarkActionsMenu({ archived = false, pinned = false, onDelete, onToggleArchive, onTogglePin }) {
   return (
     <DropdownMenu>
       <DropdownItem leftIcon="link-external">Visit</DropdownItem>
@@ -10,7 +10,7 @@ function BookmarkActionsMenu({ archived = false, pinned = false, onToggleArchive
       {archived ? (
         <>
           <DropdownItem leftIcon="refresh" onClick={onToggleArchive}>Restore</DropdownItem>
-          <DropdownItem leftIcon="trash">Delete Permanently</DropdownItem>
+          <DropdownItem leftIcon="trash" onClick={onDelete}>Delete Permanently</DropdownItem>
         </>
       ) : (
         <>
@@ -21,6 +21,7 @@ function BookmarkActionsMenu({ archived = false, pinned = false, onToggleArchive
           )}
           <DropdownItem leftIcon="edit">Edit</DropdownItem>
           <DropdownItem leftIcon="archive" onClick={onToggleArchive}>Archive</DropdownItem>
+          <DropdownItem leftIcon="trash" onClick={onDelete}>Delete</DropdownItem>
         </>
       )}
     </DropdownMenu>

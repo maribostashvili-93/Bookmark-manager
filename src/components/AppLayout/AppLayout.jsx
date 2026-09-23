@@ -31,6 +31,7 @@ function AppLayout({
   profileOpen = false,
   searchValue,
   onAddBookmark,
+  onDeleteBookmark,
   onNavigate,
   onToggleArchive,
   onTogglePin,
@@ -58,6 +59,11 @@ function AppLayout({
     setIsAddModalOpen(false)
   }
 
+  function handleDeleteBookmark(bookmarkId) {
+    onDeleteBookmark?.(bookmarkId)
+    setActiveMenuId(null)
+  }
+
   return (
     <div className="app">
       <Sidebar
@@ -82,6 +88,7 @@ function AppLayout({
             bookmarks={bookmarks}
             emptyMessage={emptyMessage}
             openMenuId={visibleMenuId}
+            onDeleteBookmark={handleDeleteBookmark}
             onToggleArchive={handleToggleArchive}
             onToggleMenu={handleMenuToggle}
             onTogglePin={handleTogglePin}
