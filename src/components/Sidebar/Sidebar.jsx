@@ -46,6 +46,22 @@ function Sidebar({ open = false, active = 'home', selectedTag = '', onClose, onN
           </li>
         </ul>
 
+        <div className="sidebar__account">
+          <p className="tags__title">ACCOUNT &amp; APPEARANCE</p>
+          <div className="sidebar__auth-actions">
+            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signin'); onClose?.() }}>
+              <span className="nav-item__label text-preset-3">Sign in</span>
+            </button>
+            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signup'); onClose?.() }}>
+              <span className="nav-item__label text-preset-3">Sign up</span>
+            </button>
+          </div>
+          <div className="sidebar__theme-row">
+            <span className="text-preset-4">Light / Dark</span>
+            <AppearanceToggle />
+          </div>
+        </div>
+
         <div className="tags">
           <div className="tags__heading">
             <p className="tags__title">TAGS</p>
@@ -77,21 +93,6 @@ function Sidebar({ open = false, active = 'home', selectedTag = '', onClose, onN
           </ul>
         </div>
 
-        <div className="sidebar__account">
-          <p className="tags__title">ACCOUNT</p>
-          <div className="sidebar__auth-actions">
-            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signin'); onClose?.() }}>
-              <span className="nav-item__label text-preset-3">Sign in</span>
-            </button>
-            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signup'); onClose?.() }}>
-              <span className="nav-item__label text-preset-3">Sign up</span>
-            </button>
-          </div>
-          <div className="sidebar__theme-row">
-            <span className="text-preset-4">Theme</span>
-            <AppearanceToggle />
-          </div>
-        </div>
       </nav>
     </aside>
   )
