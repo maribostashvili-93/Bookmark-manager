@@ -16,6 +16,8 @@
   width: 100%;
   border: 1px solid var(--color-modal-border);
   background: var(--color-surface);
+  max-height: calc(100dvh - (2 * var(--spacing-200)));
+  overflow-y: auto;
 }
 
 .modal--lg {

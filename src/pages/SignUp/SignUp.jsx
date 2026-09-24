@@ -1,13 +1,18 @@
 import Logo from '../../components/Logo/Logo.jsx'
 import InputField from '../../components/InputField/InputField.jsx'
 import Button from '../../components/Button/Button.jsx'
+import AppearanceToggle from '../../components/AppearanceToggle/AppearanceToggle.jsx'
 import '../Auth/Auth.css'
 
 // values: pre-filled field values · errors: messages shown under invalid fields
 // e.g. <SignUp values={{ email: 'name.gmail.com' }} errors={{ email: 'Enter a valid email address.' }} />
-function SignUp({ values = {}, errors = {} }) {
+function SignUp({ values = {}, errors = {}, onNavigate }) {
   return (
     <main className="auth-page">
+      <div className="auth-page__toolbar">
+        <button type="button" className="auth-page__back text-preset-4" onClick={() => onNavigate?.('home')}>Back to bookmarks</button>
+        <AppearanceToggle />
+      </div>
       <div className="auth-card">
         <Logo />
 
@@ -18,7 +23,7 @@ function SignUp({ values = {}, errors = {} }) {
           </p>
         </div>
 
-        <form className="auth-card__form">
+        <form className="auth-card__form" onSubmit={(event) => event.preventDefault()}>
           <InputField
             id="signup-name"
             label="Full name"
@@ -56,7 +61,7 @@ function SignUp({ values = {}, errors = {} }) {
         <div className="auth-card__footer">
           <p className="auth-card__row">
             <span className="text-preset-4-medium">Already have an account?</span>
-            <a href="#" className="auth-card__link text-preset-4">Log in</a>
+            <button type="button" className="auth-card__link text-preset-4" onClick={() => onNavigate?.('signin')}>Log in</button>
           </p>
         </div>
       </div>

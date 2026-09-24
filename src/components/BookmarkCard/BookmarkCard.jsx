@@ -60,7 +60,9 @@ function BookmarkCard({ bookmark, menuOpen = false, onDeleteBookmark, onEditBook
 
         <hr className="card__divider" />
 
-        <p className="card__description text-preset-4-medium">{description}</p>
+        <p className="card__description text-preset-4-medium">
+          {description || 'No description provided.'}
+        </p>
 
         <ul className="card__tags">
           {tags.map((tag) => (

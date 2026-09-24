@@ -2,7 +2,7 @@ import avatarImg from '../../assets/images/avatar.png'
 import './Avatar.css'
 
 // open=true shows the focus ring used while the profile menu is open
-function Avatar({ open = false, asButton = true }) {
+function Avatar({ open = false, asButton = true, onClick }) {
   const img = <img className="avatar__img" src={avatarImg} alt="" />
 
   if (!asButton) return <span className="avatar">{img}</span>
@@ -13,6 +13,7 @@ function Avatar({ open = false, asButton = true }) {
       className={`avatar ${open ? 'avatar--open' : ''}`}
       aria-label="Open profile menu"
       aria-expanded={open}
+      onClick={onClick}
     >
       {img}
     </button>

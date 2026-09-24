@@ -2,6 +2,8 @@
 
 A clean and responsive React application for saving, organizing, searching, and managing useful web links.
 
+[GitHub repository](https://github.com/maribostashvili-93/Bookmark-manager)
+
 The interface is based on the [Bookmark Manager Figma design](https://www.figma.com/design/giO3ChUIk9nSfgzW6aEVh5/bookmark-manager-app?node-id=234-4992&m=dev&t=eztu8u7hiTorkICO-1) and supports desktop, tablet, and mobile layouts.
 
 ## Features
@@ -66,8 +68,10 @@ Bookmark-manager/
 |-- src/
 |   |-- assets/          # Icons, favicons, and images
 |   |-- components/      # Reusable UI components
-|   |-- data/            # Bookmark data
+|   |-- context/         # Shared theme context and provider
+|   |-- hooks/           # Bookmark persistence and theme hooks
 |   |-- pages/           # Application pages
+|   |-- utils/           # Bookmark transformation pipeline
 |   |-- App.jsx
 |   |-- index.css
 |   `-- main.jsx

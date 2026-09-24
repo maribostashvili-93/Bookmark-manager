@@ -26,7 +26,7 @@ function AppLayout({
   active = 'home',
   selectedTags = [],
   selectedTag = '',
-  sidebarOpen = false,
+  sidebarOpen,
   modal,
   toast,
   openMenuId,
@@ -45,11 +45,13 @@ function AppLayout({
   onUpdateBookmark,
 }) {
   const [activeMenuId, setActiveMenuId] = useState(null)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isFormModalOpen, setIsFormModalOpen] = useState(false)
   const [editingBookmark, setEditingBookmark] = useState(null)
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false)
   const visibleMenuId = openMenuId ?? activeMenuId
   const isSortOpen = sortOpen || isSortMenuOpen
+  const visibleSidebarOpen = sidebarOpen ?? isSidebarOpen
 
   function handleMenuToggle(bookmarkId) {
     setActiveMenuId((currentId) => (currentId === bookmarkId ? null : bookmarkId))
@@ -104,19 +106,21 @@ function AppLayout({
   return (
     <div className="app">
       <Sidebar
-        open={sidebarOpen}
+        open={visibleSidebarOpen}
         active={active}
         selectedTag={selectedTag || selectedTags[0] || ''}
         onNavigate={onNavigate}
         onTagChange={onTagChange}
+        onClose={() => setIsSidebarOpen(false)}
       />
-      {sidebarOpen && <div className="sidebar-overlay" />}
+      {visibleSidebarOpen && <button type="button" className="sidebar-overlay" aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} />}
 
       <div className="app__content">
         <Header
           searchValue={searchValue}
           profileOpen={profileOpen}
           onAddBookmark={handleOpenAddForm}
+          onMenuOpen={() => setIsSidebarOpen(true)}
           onSearchChange={onSearchChange}
         />
 

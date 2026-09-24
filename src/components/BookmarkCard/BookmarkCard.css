@@ -5,6 +5,8 @@
   background: var(--color-surface);
   border-radius: var(--radius-12);
   box-shadow: var(--shadow-card);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .card--menu-open {
@@ -60,6 +62,7 @@
 
 .card__description {
   color: var(--color-text-muted);
+  overflow-wrap: anywhere;
 }
 
 .card__tags {

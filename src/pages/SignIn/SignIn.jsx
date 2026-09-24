@@ -1,11 +1,16 @@
 import Logo from '../../components/Logo/Logo.jsx'
 import InputField from '../../components/InputField/InputField.jsx'
 import Button from '../../components/Button/Button.jsx'
+import AppearanceToggle from '../../components/AppearanceToggle/AppearanceToggle.jsx'
 import '../Auth/Auth.css'
 
-function SignIn() {
+function SignIn({ onNavigate }) {
   return (
     <main className="auth-page">
+      <div className="auth-page__toolbar">
+        <button type="button" className="auth-page__back text-preset-4" onClick={() => onNavigate?.('home')}>Back to bookmarks</button>
+        <AppearanceToggle />
+      </div>
       <div className="auth-card">
         <Logo />
 
@@ -14,7 +19,7 @@ function SignIn() {
           <p className="auth-card__subtitle text-preset-4-medium">Welcome back! Please enter your details.</p>
         </div>
 
-        <form className="auth-card__form">
+        <form className="auth-card__form" onSubmit={(event) => event.preventDefault()}>
           <InputField id="signin-email" label="Email" type="email" autoComplete="email" />
           <InputField id="signin-password" label="Password" type="password" autoComplete="current-password" />
           <Button hierarchy="primary" size="md" type="submit" className="btn--block">
@@ -25,11 +30,11 @@ function SignIn() {
         <div className="auth-card__footer">
           <p className="auth-card__row">
             <span className="text-preset-4-medium">Forgot password?</span>
-            <a href="#" className="auth-card__link text-preset-4">Reset it</a>
+            <button type="button" className="auth-card__link text-preset-4" onClick={() => onNavigate?.('forgot-password')}>Reset it</button>
           </p>
           <p className="auth-card__row">
             <span className="text-preset-4-medium">Don’t have an account?</span>
-            <a href="#" className="auth-card__link text-preset-4">Sign up</a>
+            <button type="button" className="auth-card__link text-preset-4" onClick={() => onNavigate?.('signup')}>Sign up</button>
           </p>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Icon from '../Icon/Icon.jsx'
 import Avatar from '../Avatar/Avatar.jsx'
 import ProfileMenu from '../ProfileMenu/ProfileMenu.jsx'
@@ -6,12 +7,14 @@ import '../Button/Button.css'
 import './Header.css'
 
 // searchValue: pre-filled search text · profileOpen: shows the profile menu
-function Header({ searchValue = '', profileOpen = false, onAddBookmark, onSearchChange }) {
+function Header({ searchValue = '', profileOpen, onAddBookmark, onMenuOpen, onSearchChange }) {
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
+  const visibleProfileOpen = profileOpen ?? isProfileOpen
   return (
     <header className="header">
       <div className="header__start">
         {/* Opens the sidebar drawer — tablet / mobile only */}
-        <button type="button" className="header__menu" aria-label="Open menu">
+        <button type="button" className="header__menu" aria-label="Open menu" onClick={onMenuOpen}>
           <Icon name="menu" />
         </button>
 
@@ -34,8 +37,8 @@ function Header({ searchValue = '', profileOpen = false, onAddBookmark, onSearch
           <span className="btn__text text-preset-3">Add Bookmark</span>
         </button>
         <div className="popover-anchor">
-          <Avatar open={profileOpen} />
-          {profileOpen && (
+          <Avatar open={visibleProfileOpen} onClick={() => setIsProfileOpen((isOpen) => !isOpen)} />
+          {visibleProfileOpen && (
             <div className="popover">
               <ProfileMenu />
             </div>

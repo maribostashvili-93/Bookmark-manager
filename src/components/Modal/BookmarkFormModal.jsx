@@ -45,10 +45,6 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
       nextErrors.url = 'Please enter a valid URL'
     }
 
-    if (!form.description.trim()) {
-      nextErrors.description = 'Description is required'
-    }
-
     if (tags.length === 0) {
       nextErrors.tags = 'Please enter at least one tag'
     }
@@ -109,8 +105,7 @@ function BookmarkFormModal({ mode = 'add', bookmark = {}, onSubmit, onCancel }) 
         <TextareaField
           id="bookmark-description"
           name="description"
-          label="Description"
-          required
+          label="Description (optional)"
           maxLength={280}
           value={form.description}
           onChange={handleChange}

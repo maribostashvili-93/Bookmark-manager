@@ -7,7 +7,7 @@ function BookmarkList({ bookmarks = [], emptyMessage, error, isLoading = false, 
   }
 
   if (error) {
-    return <EmptyData message="Unable to load bookmarks." description={error} />
+    return <EmptyData message="Something went wrong while loading bookmarks." description={error} />
   }
 
   if (bookmarks.length === 0) {

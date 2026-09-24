@@ -1,6 +1,7 @@
 import Icon from '../Icon/Icon.jsx'
 import Logo from '../Logo/Logo.jsx'
 import Checkbox from '../Checkbox/Checkbox.jsx'
+import AppearanceToggle from '../AppearanceToggle/AppearanceToggle.jsx'
 import './Sidebar.css'
 
 const tags = ['React', 'JavaScript', 'CSS', 'Tools']
@@ -9,12 +10,12 @@ const tags = ['React', 'JavaScript', 'CSS', 'Tools']
 // Tablet / mobile (< 1024px): off-canvas drawer, shown when open=true.
 // active: "home" | "archived" | null — highlighted nav item
 // selectedTag: one active tag; an empty value represents the All option.
-function Sidebar({ open = false, active = 'home', selectedTag = '', onNavigate, onTagChange }) {
+function Sidebar({ open = false, active = 'home', selectedTag = '', onClose, onNavigate, onTagChange }) {
   return (
     <aside className={`sidebar ${open ? 'sidebar--open' : ''}`}>
       <div className="sidebar__header">
         <Logo href="#" />
-        <button type="button" className="sidebar__close" aria-label="Close menu">
+        <button type="button" className="sidebar__close" aria-label="Close menu" onClick={onClose}>
           <Icon name="x-close" />
         </button>
       </div>
@@ -26,7 +27,7 @@ function Sidebar({ open = false, active = 'home', selectedTag = '', onNavigate, 
               type="button"
               className={`nav-item ${active === 'home' ? 'nav-item--active' : ''}`}
               aria-current={active === 'home' ? 'page' : undefined}
-              onClick={() => onNavigate?.('home')}
+              onClick={() => { onNavigate?.('home'); onClose?.() }}
             >
               <Icon name="home" />
               <span className="nav-item__label text-preset-3">All Bookmarks</span>
@@ -37,7 +38,7 @@ function Sidebar({ open = false, active = 'home', selectedTag = '', onNavigate, 
               type="button"
               className={`nav-item ${active === 'archived' ? 'nav-item--active' : ''}`}
               aria-current={active === 'archived' ? 'page' : undefined}
-              onClick={() => onNavigate?.('archived')}
+              onClick={() => { onNavigate?.('archived'); onClose?.() }}
             >
               <Icon name="archive" />
               <span className="nav-item__label text-preset-3">Archived</span>
@@ -74,6 +75,22 @@ function Sidebar({ open = false, active = 'home', selectedTag = '', onNavigate, 
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="sidebar__account">
+          <p className="tags__title">ACCOUNT</p>
+          <div className="sidebar__auth-actions">
+            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signin'); onClose?.() }}>
+              <span className="nav-item__label text-preset-3">Sign in</span>
+            </button>
+            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signup'); onClose?.() }}>
+              <span className="nav-item__label text-preset-3">Sign up</span>
+            </button>
+          </div>
+          <div className="sidebar__theme-row">
+            <span className="text-preset-4">Theme</span>
+            <AppearanceToggle />
+          </div>
         </div>
       </nav>
     </aside>

@@ -1,11 +1,45 @@
 /* Shared auth layout — Sign in, Sign up, Forgot password */
 .auth-page {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding: var(--spacing-200);
   background: var(--color-bg-app);
+}
+
+.auth-page__toolbar {
+  position: absolute;
+  top: var(--spacing-200);
+  right: var(--spacing-200);
+  left: var(--spacing-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-200);
+}
+
+.auth-page__back,
+.auth-card__link {
+  padding: var(--spacing-050);
+  border: none;
+  border-radius: var(--radius-4);
+  background: transparent;
+  cursor: pointer;
+}
+
+.auth-page__back {
+  color: var(--color-text-muted);
+}
+
+.auth-page__back:hover {
+  color: var(--color-text);
+}
+
+.auth-page__back:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .auth-card {
