@@ -1,7 +1,6 @@
 import Icon from '../Icon/Icon.jsx'
 import Logo from '../Logo/Logo.jsx'
 import Checkbox from '../Checkbox/Checkbox.jsx'
-import AppearanceToggle from '../AppearanceToggle/AppearanceToggle.jsx'
 import './Sidebar.css'
 
 const tags = ['React', 'JavaScript', 'CSS', 'Tools']
@@ -45,22 +44,6 @@ function Sidebar({ open = false, active = 'home', selectedTag = '', onClose, onN
             </button>
           </li>
         </ul>
-
-        <div className="sidebar__account">
-          <p className="tags__title">ACCOUNT &amp; APPEARANCE</p>
-          <div className="sidebar__auth-actions">
-            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signin'); onClose?.() }}>
-              <span className="nav-item__label text-preset-3">Sign in</span>
-            </button>
-            <button type="button" className="nav-item" onClick={() => { onNavigate?.('signup'); onClose?.() }}>
-              <span className="nav-item__label text-preset-3">Sign up</span>
-            </button>
-          </div>
-          <div className="sidebar__theme-row">
-            <span className="text-preset-4">Light / Dark</span>
-            <AppearanceToggle />
-          </div>
-        </div>
 
         <div className="tags">
           <div className="tags__heading">

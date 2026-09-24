@@ -125,39 +125,6 @@
   padding: 0 var(--spacing-150) var(--spacing-050);
 }
 
-.sidebar__account {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-075);
-  padding: var(--spacing-150);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-8);
-  background: var(--color-surface-muted);
-}
-
-.sidebar__auth-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-100);
-}
-
-.sidebar__auth-actions .nav-item {
-  justify-content: center;
-  text-align: center;
-}
-
-.sidebar__auth-actions .nav-item__label {
-  flex: initial;
-}
-
-.sidebar__theme-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-100);
-  color: var(--color-text-muted);
-}
-
 .tags__title {
   font-size: 12px;
   font-weight: 700;

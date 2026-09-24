@@ -19,7 +19,7 @@ function SignIn({ onNavigate }) {
           <p className="auth-card__subtitle text-preset-4-medium">Welcome back! Please enter your details.</p>
         </div>
 
-        <form className="auth-card__form" onSubmit={(event) => event.preventDefault()}>
+        <form className="auth-card__form" onSubmit={(event) => { event.preventDefault(); onNavigate?.('home') }}>
           <InputField id="signin-email" label="Email" type="email" autoComplete="email" />
           <InputField id="signin-password" label="Password" type="password" autoComplete="current-password" />
           <Button hierarchy="primary" size="md" type="submit" className="btn--block">

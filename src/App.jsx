@@ -18,7 +18,7 @@ function App() {
     handleTogglePin,
     handleUpdateBookmark,
   } = useBookmarks()
-  const [currentView, setCurrentView] = useState('home')
+  const [currentView, setCurrentView] = useState('signin')
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTag, setSelectedTag] = useState('')
   const [sortOption, setSortOption] = useState('Recently added')

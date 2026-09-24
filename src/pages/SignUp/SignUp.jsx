@@ -23,7 +23,7 @@ function SignUp({ values = {}, errors = {}, onNavigate }) {
           </p>
         </div>
 
-        <form className="auth-card__form" onSubmit={(event) => event.preventDefault()}>
+        <form className="auth-card__form" onSubmit={(event) => { event.preventDefault(); onNavigate?.('home') }}>
           <InputField
             id="signup-name"
             label="Full name"

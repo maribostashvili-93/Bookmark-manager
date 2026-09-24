@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Icon from '../Icon/Icon.jsx'
 import Avatar from '../Avatar/Avatar.jsx'
 import ProfileMenu from '../ProfileMenu/ProfileMenu.jsx'
+import AppearanceToggle from '../AppearanceToggle/AppearanceToggle.jsx'
 import '../DropdownMenu/DropdownMenu.css'
 import '../Button/Button.css'
 import './Header.css'
@@ -36,6 +37,7 @@ function Header({ searchValue = '', profileOpen, onAddBookmark, onMenuOpen, onSe
           <Icon name="plus" />
           <span className="btn__text text-preset-3">Add Bookmark</span>
         </button>
+        <AppearanceToggle />
         <div className="popover-anchor">
           <Avatar open={visibleProfileOpen} onClick={() => setIsProfileOpen((isOpen) => !isOpen)} />
           {visibleProfileOpen && (
