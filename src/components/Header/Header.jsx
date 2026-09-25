@@ -8,7 +8,7 @@ import '../Button/Button.css'
 import './Header.css'
 
 // searchValue: pre-filled search text · profileOpen: shows the profile menu
-function Header({ searchValue = '', profileOpen, onAddBookmark, onMenuOpen, onSearchChange }) {
+function Header({ searchValue = '', profileOpen, user, onAddBookmark, onMenuOpen, onSearchChange, onSignOut }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const visibleProfileOpen = profileOpen ?? isProfileOpen
   return (
@@ -42,7 +42,7 @@ function Header({ searchValue = '', profileOpen, onAddBookmark, onMenuOpen, onSe
           <Avatar open={visibleProfileOpen} onClick={() => setIsProfileOpen((isOpen) => !isOpen)} />
           {visibleProfileOpen && (
             <div className="popover">
-              <ProfileMenu />
+              <ProfileMenu name={user?.name} email={user?.email} onSignOut={onSignOut} />
             </div>
           )}
         </div>

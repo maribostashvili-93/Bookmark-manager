@@ -2,7 +2,7 @@ import Avatar from '../Avatar/Avatar.jsx'
 import { DropdownItem } from '../DropdownMenu/DropdownMenu.jsx'
 import './ProfileMenu.css'
 
-function ProfileMenu({ name = 'Emily Carter', email = 'emily101@gmail.com' }) {
+function ProfileMenu({ name = 'Demo User', email = 'demo@bookmark.app', onSignOut }) {
   return (
     <div className="profile-menu" role="menu">
       <div className="profile-menu__header">
@@ -14,7 +14,7 @@ function ProfileMenu({ name = 'Emily Carter', email = 'emily101@gmail.com' }) {
       </div>
 
       <ul className="profile-menu__section profile-menu__footer">
-        <DropdownItem leftIcon="logout">Logout</DropdownItem>
+        <DropdownItem leftIcon="logout" onClick={onSignOut}>Logout</DropdownItem>
       </ul>
     </div>
   )

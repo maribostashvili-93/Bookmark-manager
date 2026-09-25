@@ -1,14 +1,28 @@
+import { useState } from 'react'
 import Logo from '../../components/Logo/Logo.jsx'
 import InputField from '../../components/InputField/InputField.jsx'
 import Button from '../../components/Button/Button.jsx'
 import AppearanceToggle from '../../components/AppearanceToggle/AppearanceToggle.jsx'
 import '../Auth/Auth.css'
+import { signIn } from '../../utils/authStorage.js'
 
-function SignIn({ onNavigate }) {
+function SignIn({ onAuthenticated, onNavigate }) {
+  const [error, setError] = useState('')
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    try {
+      setError('')
+      onAuthenticated?.(signIn({ email: formData.get('email'), password: formData.get('password') }))
+    } catch (authError) {
+      setError(authError.message)
+    }
+  }
+
   return (
     <main className="auth-page">
       <div className="auth-page__toolbar">
-        <button type="button" className="auth-page__back text-preset-4" onClick={() => onNavigate?.('home')}>Back to bookmarks</button>
         <AppearanceToggle />
       </div>
       <div className="auth-card">
@@ -19,9 +33,10 @@ function SignIn({ onNavigate }) {
           <p className="auth-card__subtitle text-preset-4-medium">Welcome back! Please enter your details.</p>
         </div>
 
-        <form className="auth-card__form" onSubmit={(event) => { event.preventDefault(); onNavigate?.('home') }}>
-          <InputField id="signin-email" label="Email" type="email" autoComplete="email" />
-          <InputField id="signin-password" label="Password" type="password" autoComplete="current-password" />
+        <form className="auth-card__form" onSubmit={handleSubmit}>
+          <InputField id="signin-email" name="email" label="Email" type="email" autoComplete="email" required />
+          <InputField id="signin-password" name="password" label="Password" type="password" autoComplete="current-password" required />
+          {error && <p className="auth-card__message auth-card__message--error text-preset-4-medium" role="alert">{error}</p>}
           <Button hierarchy="primary" size="md" type="submit" className="btn--block">
             Log in
           </Button>

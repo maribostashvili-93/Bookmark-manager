@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp/SignUp.jsx'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword.jsx'
 import useBookmarks from './hooks/useBookmarks.js'
 import { getVisibleBookmarks } from './utils/bookmarkPipeline.js'
+import { getSession, signOut } from './utils/authStorage.js'
 
 function App() {
   const {
@@ -18,7 +19,8 @@ function App() {
     handleTogglePin,
     handleUpdateBookmark,
   } = useBookmarks()
-  const [currentView, setCurrentView] = useState('signin')
+  const [session, setSession] = useState(getSession)
+  const [currentView, setCurrentView] = useState(() => (getSession() ? 'home' : 'signin'))
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTag, setSelectedTag] = useState('')
   const [sortOption, setSortOption] = useState('Recently added')
@@ -34,6 +36,17 @@ function App() {
   function handleAddAndShowBookmark(bookmarkData) {
     handleAddBookmark(bookmarkData)
     setCurrentView('home')
+  }
+
+  function handleAuthenticated(user) {
+    setSession(user)
+    setCurrentView('home')
+  }
+
+  function handleSignOut() {
+    signOut()
+    setSession(null)
+    setCurrentView('signin')
   }
 
   const sharedPageProps = {
@@ -52,6 +65,8 @@ function App() {
     searchTerm,
     selectedTag,
     sortOption,
+    user: session,
+    onSignOut: handleSignOut,
     emptyMessage: hasSearchTerm
       ? 'No bookmarks match your search.'
       : selectedTag
@@ -60,11 +75,11 @@ function App() {
   }
 
   if (currentView === 'signin') {
-    return <SignIn onNavigate={setCurrentView} />
+    return <SignIn onAuthenticated={handleAuthenticated} onNavigate={setCurrentView} />
   }
 
   if (currentView === 'signup') {
-    return <SignUp onNavigate={setCurrentView} />
+    return <SignUp onAuthenticated={handleAuthenticated} onNavigate={setCurrentView} />
   }
 
   if (currentView === 'forgot-password') {

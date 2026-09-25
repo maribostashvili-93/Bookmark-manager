@@ -4,6 +4,15 @@ A clean and responsive React application for saving, organizing, searching, and 
 
 [GitHub repository](https://github.com/maribostashvili-93/Bookmark-manager)
 
+[Live demo](https://maribostashvili-93.github.io/Bookmark-manager/)
+
+Demo account:
+
+```text
+Email: demo@bookmark.app
+Password: Demo123!
+```
+
 The interface is based on the [Bookmark Manager Figma design](https://www.figma.com/design/giO3ChUIk9nSfgzW6aEVh5/bookmark-manager-app?node-id=234-4992&m=dev&t=eztu8u7hiTorkICO-1) and supports desktop, tablet, and mobile layouts.
 
 ## Features
@@ -18,6 +27,7 @@ The interface is based on the [Bookmark Manager Figma design](https://www.figma.
 - Responsive layouts for desktop, tablet, and mobile
 - Reusable React components
 - Persistent bookmark and theme data with `localStorage`
+- Local sign up, sign in, password reset, and persistent sessions
 
 ## Built With
 
@@ -82,6 +92,10 @@ Bookmark-manager/
 ## Bookmark Data
 
 The application checks `localStorage` first. If no saved bookmarks are available, it loads the initial data from `public/data/bookmarks.json`. Later changes are saved back to `localStorage`.
+
+## Authentication Data
+
+Authentication is implemented as a front-end demo. Accounts, passwords, and the active session are stored in the browser's `localStorage`; no server or production-grade security is included.
 
 ## Application Architecture
 

@@ -33,6 +33,7 @@ function AppLayout({
   sortOpen = false,
   sortOption = 'Recently added',
   profileOpen = false,
+  user,
   searchValue,
   onAddBookmark,
   onDeleteBookmark,
@@ -43,6 +44,7 @@ function AppLayout({
   onToggleArchive,
   onTogglePin,
   onUpdateBookmark,
+  onSignOut,
 }) {
   const [activeMenuId, setActiveMenuId] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -122,6 +124,8 @@ function AppLayout({
           onAddBookmark={handleOpenAddForm}
           onMenuOpen={() => setIsSidebarOpen(true)}
           onSearchChange={onSearchChange}
+          user={user}
+          onSignOut={onSignOut}
         />
 
         <main className="main">
